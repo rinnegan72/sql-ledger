@@ -26,5 +26,11 @@ func updateByID(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Println("performing ", action, " transaction for userid ", id, " amount ", user.Amount)
+	if action == "deposit" || action == "withdraw" {
+		fmt.Println("performing ", action, " transaction for userid ", id, " amount ", user.Amount)
+		c.JSON(http.StatusOK, gin.H{"sucess": "true", "message": "Transaction successful"})
+	} else {
+		fmt.Println("Invalid Action")
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Action"})
+	}
 }
