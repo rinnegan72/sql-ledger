@@ -63,7 +63,7 @@ tx := db.begin_transaction()
 withdrawl example:
 ```
 curl -X POST \
-- d '{ amount: 675 }' \
+-d '{ amount: 675 }' \
 http://localhost:8080/user/72/withdraw
 ```
 
