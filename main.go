@@ -1,16 +1,19 @@
 package main
+
 import (
-    "net/http"
-    "fmt"
-    "github.com/gin-gonic/gin"
+	"fmt"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
+
 type UpdateData struct {
 	Amount int `json:"amount"`
 }
-func main(){
+
+func main() {
 	fmt.Println("You get as much as you ask!")
 	router := gin.Default()
-	router.POST("/user/:id/:action", updateByID)
 	router.POST("/user/:id/:action", updateByID)
 	router.Run("localhost:8080")
 }
