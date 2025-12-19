@@ -56,3 +56,21 @@ tx := db.begin_transaction()
   }
 }
 ```
+
+## Actual architecture
+
+### Input Json with POST
+withdrawl example:
+```
+curl -X POST \
+- d '{ amount: 675 }' \
+http://localhost:8080/user/72/withdraw
+```
+
+expected response:
+```
+{
+  "status": "success",
+  "message": "withdraw completed successfully"
+}
+```
