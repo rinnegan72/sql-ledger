@@ -68,6 +68,7 @@ func updateByID(c *gin.Context) {
 			if transaction_amount > account_balance {
 				c.JSON(http.StatusBadRequest, gin.H{"error": "Insufficient balance"})
 				fmt.Println(err)
+				tx.Rollback()
 				return
 			}
 			transaction_amount = transaction_amount * -1
