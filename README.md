@@ -71,6 +71,6 @@ expected response:
 ```
 {
   "status": "success",
-  "message": "withdraw completed successfully"
+  "message": "transaction completed successfully"
 }
 ```
