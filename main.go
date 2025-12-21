@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
 
@@ -26,9 +28,10 @@ func main() {
 	sql_db_password := os.Getenv("DATABASE_PASSWORD")
 	sql_db_name := os.Getenv("DATABASE_NAME")
 	sql_ssl_mode := os.Getenv("DATABASE_SSL_MODE")
-	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", sql_db_host, sql_db_user, sql_db_password, sql_db_name, sql_ssl_mode)
+	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/ssl_mode=?%s", sql_db_user, sql_db_password, sql_db_host, sql_db_name, sql_ssl_mode)
+	// dsn form for mysql: username:password@protocol(address)/dbname?param=value
 	var err error
-	db, err = sql.Open(sql_db_type, connStr)
+	db, err = sql.Open("mysql", connStr)
 	if err != nil {
 		panic(err)
 	}
@@ -79,4 +82,7 @@ func updateByID(c *gin.Context) {
 		fmt.Println("Invalid Action")
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Action"})
 	}
+}
+func createUser(c *gin.Context) {
+
 }
