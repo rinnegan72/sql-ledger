@@ -57,7 +57,7 @@ tx := db.begin_transaction()
 }
 ```
 
-## Actual architecture
+## Actual example
 
 ### Input Json with POST
 withdrawl example:
