@@ -67,6 +67,7 @@ func updateByID(c *gin.Context) {
 		if action == "withdraw" {
 			if transaction_amount > account_balance {
 				c.JSON(http.StatusBadRequest, gin.H{"error": "Insufficient balance"})
+				fmt.Println(err)
 				return
 			}
 			transaction_amount = transaction_amount * -1
@@ -75,10 +76,12 @@ func updateByID(c *gin.Context) {
 		_, err = tx.Exec("UPDATE accounts SET balance = ? WHERE id = ?", account_balance, id)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Update failed"})
+			fmt.Println(err)
 			return
 		}
 		if err = tx.Commit(); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Commit failed"})
+			fmt.Println(err)
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{"success": "true", "message": "Transaction successful"})
